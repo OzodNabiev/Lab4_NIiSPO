@@ -1,0 +1,17 @@
+apiVersion: v1 
+kind: Pod 
+metadata: 
+  name: pod-with-volume 
+  labels: 
+    app: volume-demo 
+spec: 
+  containers: 
+    - name: app 
+      image: busybox:1.36 
+      command: ["/bin/sh", "-c", "while true; do echo date - запись в том >> /data/log.txt; sleep 5; done"] 
+      volumeMounts: 
+        - name: data-volume 
+          mountPath: /data 
+  volumes: 
+    - name: data-volume 
+      emptyDir: {} 
